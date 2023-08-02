@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import moment from "moment";
 
 const DivWrapper = styled("div")`
   display: flex;
   height: 15vh;
+  position: fixed;
+  top: 10%;
 `;
 
 const TextWrapper = styled("span")`
@@ -65,40 +68,39 @@ const CurrentWrapperDay = styled("div")`
   color: #ffffff;
 `;
 
-const Monitor = ({ currentDay, calendar }) => {
+const Monitor = ({ currentDay, calendar, prevHandler, nextHandler, today }) => {
   const weekDay = ["", "M", "T", "W", "T", "F", "S", "S"];
   calendar = ["", ...calendar];
-  console.log(calendar);
 
   return (
     <DivWrapper>
       <GridWrapper>
-        {weekDay.map((i) => (
-          <CellWrapper>
+        {weekDay.map((i, index) => (
+          <CellWrapper key={index}>
             <TitleWrapper>{i}</TitleWrapper>
           </CellWrapper>
         ))}
-        {calendar.map((i) =>
+        {calendar.map((i, index) =>
           typeof i === "object" &&
           currentDay.format("DDMMYY") === i.format("DDMMYY") ? (
-            <CellWrapper>
+            <CellWrapper key={i.format("DDMMYY")}>
               <CurrentWrapperDay>
                 <TitleWrapper>{i.format("D")}</TitleWrapper>
               </CurrentWrapperDay>
             </CellWrapper>
           ) : (
-            <CellWrapper>
+            <CellWrapper key={index}>
               <TitleWrapper>
                 {typeof i === "object" && i.format("D")}
               </TitleWrapper>
             </CellWrapper>
           )
         )}
-        <ButtonWrapperLeft>&lt;</ButtonWrapperLeft>
+        <ButtonWrapperLeft onClick={prevHandler}>&lt;</ButtonWrapperLeft>
         <TextWrapperCenter>
-          <TitleWrapper>{currentDay.format("MMMMYYYY")}</TitleWrapper>
+          <TitleWrapper>{today.format("MMMMYYYY")}</TitleWrapper>
         </TextWrapperCenter>
-        <ButtonWrapperRight>&gt;</ButtonWrapperRight>
+        <ButtonWrapperRight onClick={nextHandler}>&gt;</ButtonWrapperRight>
       </GridWrapper>
     </DivWrapper>
   );

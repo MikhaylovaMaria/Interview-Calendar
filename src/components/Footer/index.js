@@ -10,16 +10,22 @@ const DivWrapper = styled("div")`
   width: 100%;
   height: 10vh;
 `;
+
+const TodayButton = styled("button")`
+  border: unset;
+  background: none;
+`;
 const TextWrapper = styled("span")`
   font-size: 25px;
   color: #ff3131;
-
 `;
 
-const Footer = () => {
+const Footer = ({ toToday }) => {
   return (
     <DivWrapper>
-      <TextWrapper>Today</TextWrapper>
+      <TodayButton onClick={toToday}>
+        <TextWrapper>Today</TextWrapper>
+      </TodayButton>
     </DivWrapper>
   );
 };

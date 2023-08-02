@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import moment from "moment";
 
 // const GridWrapper = styled.div`
 //   display: grid;
@@ -15,11 +16,13 @@ import styled from "styled-components";
 //   background-color: #ffffff;
 //   color: #c0c0c0;
 // `;
+
 const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(8, auto);
   grid-template-rows: repeat(24, auto);
   background-color: #e6e6e6;
+  margin-top: 20%;
 `;
 
 const CellWrapper = styled.div`
@@ -36,13 +39,27 @@ const CellWrapper = styled.div`
 
 const RowInCell = styled.div`
   display: flex;
-  justify-content: ${(props) =>
+  flex-direction: column;
+  justifyсontent: ${(props) =>
     props.justifyContent ? props.justifyContent : "flex-start"};
 `;
 
 const DayWrapper = styled.div`
-  height: 33px;
+  //  height: 33px;
   // width: 33px;
+  height: 0px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ShowDayWrapper = styled("div")`
+  background-color: #ebecff;
+  margin: 2%;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  grid-area: 1 / 1 / span 1 / span 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,27 +82,33 @@ function getDaysArray(startDay) {
   return resultArray;
 }
 
-const CalendarGrid = ({ startDayWeek }) => {
+function isBusyDay(day, events) {
+  for (let i = 0; i < events.length; i++) {
+    const temp = moment.unix(events[i].content.time);
+    if (moment(day).isSame(temp, "day") && moment(day).isSame(temp, "hour"))
+      return true;
+  }
+  return false;
+}
+
+const CalendarGrid = ({ startDayWeek, events }) => {
   const daysArray = getDaysArray(startDayWeek);
 
-  // return (
-  //   <GridWrapper>
-  //     {daysArray.map((i) => (
-  //       <CellWrapper key={i}>
-  //         <RowInCell justifyContent={"flex-end"}>
-  //           <DayWrapper>{typeof i !== "object" && i}</DayWrapper>
-  //         </RowInCell>
-  //       </CellWrapper>
-  //     ))}
-  //   </GridWrapper>
-  // );
   return (
     <GridWrapper>
       {daysArray.map((i, index) => (
         <CellWrapper key={i} index={index}>
-          <RowInCell justifyContent={"flex-end"}>
-            <DayWrapper>{typeof i !== "object" && i}</DayWrapper>
-          </RowInCell>
+          {events?.length > 0 && isBusyDay(i, events) ? (
+            <ShowDayWrapper>
+              <RowInCell justifyContent={"flex-end"}>
+                <DayWrapper>{typeof i !== "object" && i}</DayWrapper>
+              </RowInCell>
+            </ShowDayWrapper>
+          ) : (
+            <RowInCell justifyContent={"flex-end"}>
+              <DayWrapper>{typeof i !== "object" && i}</DayWrapper>
+            </RowInCell>
+          )}
         </CellWrapper>
       ))}
     </GridWrapper>
