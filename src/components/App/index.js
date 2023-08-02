@@ -9,7 +9,7 @@ import { getEvents } from "../../service";
 
 function App() {
   const [today, setToday] = useState(moment());
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [events, setEvents] = useState([]);
   const [currentEvents, setCurrentEvents] = useState([]);
 
@@ -52,8 +52,10 @@ function App() {
     setToday(currentDay);
   };
   const plusHandler = () => {
-    setIsOpen(true);
+    setIsOpenModal(true);
   };
+
+  console.log(moment("2023-08-02 23:47:55").isValid());
 
   return (
     <div>
@@ -67,7 +69,7 @@ function App() {
       />
       <CalendarGrid startDayWeek={startDayWeek} events={currentEvents} />
       <Footer toToday={toToday} />
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
     </div>
   );
 }

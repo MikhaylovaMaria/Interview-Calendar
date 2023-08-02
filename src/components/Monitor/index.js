@@ -34,20 +34,13 @@ const CellWrapper = styled.div`
     width: 90px;
   }
 `;
-const ButtonWrapperRight = styled("button")`
+
+const ButtonWrapper = styled("button")`
   border: unset;
   background-color: #f6f6f6;
   color: #ff3131;
   height: 20px;
-  grid-area: 3 / 8 / 4 / 9;
-  font-size: x-large;
-`;
-const ButtonWrapperLeft = styled("button")`
-  border: unset;
-  background-color: #f6f6f6;
-  color: #ff3131;
-  height: 20px;
-  grid-area: 3 / 2 / 4 / 3;
+  grid-area: ${(props) => (props.$left ? "3 / 2 / 4 / 3" : "3 / 8 / 4 / 9")};
   font-size: x-large;
 `;
 const TextWrapperCenter = styled("div")`
@@ -96,11 +89,13 @@ const Monitor = ({ currentDay, calendar, prevHandler, nextHandler, today }) => {
           </CellWrapper>
         )
       )}
-      <ButtonWrapperLeft onClick={prevHandler}>&lt;</ButtonWrapperLeft>
+      <ButtonWrapper $left onClick={prevHandler}>
+        &lt;
+      </ButtonWrapper>
       <TextWrapperCenter>
         <TitleWrapper>{today.format("MMMMYYYY")}</TitleWrapper>
       </TextWrapperCenter>
-      <ButtonWrapperRight onClick={nextHandler}>&gt;</ButtonWrapperRight>
+      <ButtonWrapper onClick={nextHandler}>&gt;</ButtonWrapper>
     </GridWrapper>
   );
 };

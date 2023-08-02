@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -11,7 +12,16 @@ const ModalWrapper = styled.div`
   background-color: rgba(155, 155, 159, 0.5);
   z-index: 999;
 `;
-
+const Input = styled.input`
+  padding: 0.5em;
+  color: #000;
+  background: #ffff;
+  border: 1px solid #999;
+  border-radius: 3px;
+  caret-color: #007aff;
+  width: 100%;
+  outline: none;
+`;
 const ModalContent = styled.div`
   position: absolute;
   top: 50%;
@@ -32,24 +42,15 @@ const ModalButtonWrapper = styled.div`
 const ModalButton = styled.button`
   padding: 10px 20px;
   color: #007aff;
-  border: none;
+  // border: none;
   border-radius: 4px;
   cursor: pointer;
   background-color: #e6e6e7;
   flex: 1;
-  margin-right: 5px;
-`;
-const DateTimeInput = styled.input.attrs({
-  type: "text",
-  pattern: "^\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}$",
-})`
-  padding: 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  margin-right: 0px;
 `;
 
-const Modal = ({ isOpen, setIsOpen }) => {
+const Modal = ({ isOpenModal, setIsOpenModal }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
@@ -58,21 +59,21 @@ const Modal = ({ isOpen, setIsOpen }) => {
   };
 
   const toggleModal = () => {
-    setIsOpen(!isOpen);
+    setIsOpenModal(!isOpenModal);
   };
   const createEvent = () => {
     console.log(inputValue);
   };
   return (
     <div>
-      <ModalWrapper isOpen={isOpen} onClick={toggleModal}>
+      <ModalWrapper isOpen={isOpenModal} onClick={toggleModal}>
         <ModalContent onClick={(e) => e.stopPropagation()}>
           <h2>https://calendar.com</h2>
           <p>Enter event time: YYYY-MM-DD HH:mm:ss</p>
-          <input onChange={() => handleInputChange} />
+          <Input onChange={() => handleInputChange} />
           <ModalButtonWrapper>
-            <ModalButton onClick={createEvent}>Cancel</ModalButton>
-            <ModalButton onClick={toggleModal}>Ок</ModalButton>
+            <ModalButton onClick={toggleModal}>Cancel</ModalButton>
+            <ModalButton onClick={createEvent}>Ок</ModalButton>
           </ModalButtonWrapper>
         </ModalContent>
       </ModalWrapper>
