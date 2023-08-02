@@ -1,17 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const DivWrapper = styled("div")`
-  display: flex;
-  height: 15vh;
-  position: fixed;
-  top: 10%;
-  @media (min-width: 740px) {
-    width: 740px;
-  }
-  // width: clamp(200px, 100%, 740px);
-`;
-
 const TextWrapper = styled("span")`
   font-size: 12px;
 `;
@@ -28,13 +17,23 @@ const GridWrapper = styled.div`
   grid-template-rows: repeat(3, auto);
   grid-gap: 1px;
   background-color: #f6f6f6;
+  z-index: 100;
+  position: relative;
+  @media (min-width: 740px) {
+    width: 740px;
+    margin-top: 0.396px;
+    height: 10%;
+  }
 `;
 
 const CellWrapper = styled.div`
-  width: 140px;
+  width: clamp(50px, (100vw + 100vh) / 8, 92.5px);
   background-color: #f6f6f6;
   color: #030303;
   text-align: center;
+  @media (min-width: 740px) {
+    width: 90px;
+  }
 `;
 const ButtonWrapperRight = styled("button")`
   border: unset;
@@ -76,36 +75,34 @@ const Monitor = ({ currentDay, calendar, prevHandler, nextHandler, today }) => {
   calendar = ["", ...calendar];
 
   return (
-    <DivWrapper>
-      <GridWrapper>
-        {weekDay.map((i, index) => (
-          <CellWrapper key={index}>
-            <TitleWrapper>{i}</TitleWrapper>
+    <GridWrapper>
+      {weekDay.map((i, index) => (
+        <CellWrapper key={index}>
+          <TitleWrapper>{i}</TitleWrapper>
+        </CellWrapper>
+      ))}
+      {calendar.map((i, index) =>
+        typeof i === "object" &&
+        currentDay.format("DDMMYY") === i.format("DDMMYY") ? (
+          <CellWrapper key={i.format("DDMMYY")}>
+            <CurrentWrapperDay>
+              <TitleWrapper>{i.format("D")}</TitleWrapper>
+            </CurrentWrapperDay>
           </CellWrapper>
-        ))}
-        {calendar.map((i, index) =>
-          typeof i === "object" &&
-          currentDay.format("DDMMYY") === i.format("DDMMYY") ? (
-            <CellWrapper key={i.format("DDMMYY")}>
-              <CurrentWrapperDay>
-                <TitleWrapper>{i.format("D")}</TitleWrapper>
-              </CurrentWrapperDay>
-            </CellWrapper>
-          ) : (
-            <CellWrapper key={index}>
-              <TitleWrapper>
-                {typeof i === "object" && i.format("D")}
-              </TitleWrapper>
-            </CellWrapper>
-          )
-        )}
-        <ButtonWrapperLeft onClick={prevHandler}>&lt;</ButtonWrapperLeft>
-        <TextWrapperCenter>
-          <TitleWrapper>{today.format("MMMMYYYY")}</TitleWrapper>
-        </TextWrapperCenter>
-        <ButtonWrapperRight onClick={nextHandler}>&gt;</ButtonWrapperRight>
-      </GridWrapper>
-    </DivWrapper>
+        ) : (
+          <CellWrapper key={index}>
+            <TitleWrapper>
+              {typeof i === "object" && i.format("D")}
+            </TitleWrapper>
+          </CellWrapper>
+        )
+      )}
+      <ButtonWrapperLeft onClick={prevHandler}>&lt;</ButtonWrapperLeft>
+      <TextWrapperCenter>
+        <TitleWrapper>{today.format("MMMMYYYY")}</TitleWrapper>
+      </TextWrapperCenter>
+      <ButtonWrapperRight onClick={nextHandler}>&gt;</ButtonWrapperRight>
+    </GridWrapper>
   );
 };
 

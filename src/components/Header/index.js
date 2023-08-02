@@ -3,19 +3,22 @@ import styled from "styled-components";
 
 const DivWrapper = styled("div")`
   display: flex;
-  height: 15vh;
+  height:10%;
+  width:clamp(50px, 100%, 740px);
   position: fixed;
-  width: 100%;
-  // width: clamp(200px, 100%, 740px);
-  background-color: #ffffff;
+  background-color: #ffff;
   font-size: 25px;
   align-items: center;
+  justify-content: space-between;
+  position: relative;
   @media (min-width: 740px) {
     width: 740px;
+    height:10%;
+}
   }
 `;
 const TextWrapper = styled("span")`
-  font-size: 20x;
+  font-size: 20px;
 `;
 const TitleWrapper = styled(TextWrapper)`
   padding-left: 12.5%;
@@ -26,7 +29,7 @@ const ButtonWrapperPlus = styled("button")`
   background-color: #ffff;
   color: #ff3131;
   font-size: 40px;
-  margin-left: 60%;
+  margin-left: 0;
 `;
 
 const Header = ({ plusHandler }) => {

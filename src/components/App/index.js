@@ -66,8 +66,8 @@ function App() {
         today={today}
       />
       <CalendarGrid startDayWeek={startDayWeek} events={currentEvents} />
-      <Footer toToday={toToday} />
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      {/* <Footer toToday={toToday} />
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
     </div>
   );
 }

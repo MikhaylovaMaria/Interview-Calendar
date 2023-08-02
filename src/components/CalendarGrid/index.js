@@ -2,46 +2,28 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 
-// const GridWrapper = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(8, auto);
-//   grid-template-rows: repeat(24, auto);
-//   gap: 1px;
-//   background-color: #e6e6e6;
-//   `;
-
-// const CellWrapper = styled.div`
-//   min-width: 140px;
-//   min-height: 80px;
-//   background-color: #ffffff;
-//   color: #c0c0c0;
-// `;
-
 const GridWrapper = styled("div")`
   display: grid;
   grid-template-columns: repeat(8, auto);
   grid-template-rows: repeat(24, auto);
-  background-color: #e6e6e6;
-  margin-top: 20%;
+  background-color: red;
+  position: relative;
   width: auto;
   @media (min-width: 740px) {
-    display: grid;
     width: 740px;
-    margin: auto;
-    margin-top: 20%;
   }
 `;
 
 const CellWrapper = styled.div`
-  min-width: 140px;
-  min-height: 80px;
+  width: clamp(20px, (70vw + 70vh) / 7, 100px);
+  height: clamp(40px, (70vw + 70vh) / 7, 80px);
   background-color: #ffffff;
   color: #c0c0c0;
   display: grid;
   border-right: ${(props) =>
-    props.index % 8 === 0 ? "none" : "2px solid #e6e6e6"};
+    props.index % 8 === 0 ? "none" : "10% solid #e6e6e6"};
   border-top: ${(props) =>
-    props.index > 8 && props.index % 8 !== 0 ? "1px solid #e6e6e6" : "none"};
+    props.index > 8 && props.index % 8 !== 0 ? "10% solid #e6e6e6" : "none"};
 `;
 
 const RowInCell = styled.div`
@@ -52,8 +34,6 @@ const RowInCell = styled.div`
 `;
 
 const DayWrapper = styled.div`
-  //  height: 33px;
-  // width: 33px;
   height: 0px;
   margin-right: 10px;
   display: flex;
