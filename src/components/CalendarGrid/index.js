@@ -6,7 +6,7 @@ const GridWrapper = styled("div")`
   display: grid;
   grid-template-columns: repeat(8, auto);
   grid-template-rows: repeat(24, auto);
-  background-color: red;
+  background-color: #e6e6e6;
   position: relative;
   width: auto;
   @media (min-width: 740px) {
@@ -21,9 +21,9 @@ const CellWrapper = styled.div`
   color: #c0c0c0;
   display: grid;
   border-right: ${(props) =>
-    props.index % 8 === 0 ? "none" : "10% solid #e6e6e6"};
+    props.index % 8 === 0 ? "none" : "1px solid #e6e6e6"};
   border-top: ${(props) =>
-    props.index > 8 && props.index % 8 !== 0 ? "10% solid #e6e6e6" : "none"};
+    props.index > 8 && props.index % 8 !== 0 ? "1px solid #e6e6e6" : "none"};
 `;
 
 const RowInCell = styled.div`
