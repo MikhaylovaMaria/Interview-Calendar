@@ -17,7 +17,6 @@ const GridWrapper = styled.div`
   grid-template-rows: repeat(3, auto);
   grid-gap: 1px;
   background-color: #f6f6f6;
-  z-index: 100;
   position: relative;
   @media (min-width: 740px) {
     width: 740px;

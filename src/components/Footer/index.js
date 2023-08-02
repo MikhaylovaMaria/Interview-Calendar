@@ -2,13 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const DivWrapper = styled("div")`
-  height: 40px;
+  height: 10vh;
   background-color: #f6f6f6;
-  position: fixed;
+  position: relative;
   left: 0px;
   bottom: 0px;
   width: 100%;
-  height: 10vh;
 `;
 
 const TodayButton = styled("button")`
@@ -16,6 +15,7 @@ const TodayButton = styled("button")`
   background: none;
 `;
 const TextWrapper = styled("span")`
+  padding-left: 10%;
   font-size: 25px;
   color: #ff3131;
 `;

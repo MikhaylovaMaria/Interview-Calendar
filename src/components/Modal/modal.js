@@ -65,12 +65,11 @@ const Modal = ({ isOpen, setIsOpen }) => {
   };
   return (
     <div>
-      <ModalButton onClick={toggleModal}>Открыть модальное окно</ModalButton>
       <ModalWrapper isOpen={isOpen} onClick={toggleModal}>
         <ModalContent onClick={(e) => e.stopPropagation()}>
           <h2>https://calendar.com</h2>
           <p>Enter event time: YYYY-MM-DD HH:mm:ss</p>
-          <input onChange={()=>handleInputChange} />
+          <input onChange={() => handleInputChange} />
           <ModalButtonWrapper>
             <ModalButton onClick={createEvent}>Cancel</ModalButton>
             <ModalButton onClick={toggleModal}>Ок</ModalButton>

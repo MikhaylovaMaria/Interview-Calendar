@@ -15,8 +15,8 @@ const GridWrapper = styled("div")`
 `;
 
 const CellWrapper = styled.div`
-  width: clamp(20px, (70vw + 70vh) / 7, 92.5px);
-  height: clamp(40px, (70vw + 70vh) / 7, 72.5px);
+  width: clamp(20px, (100vw + 100vh) / 8, 92.5px);
+  height: clamp(40px, (100vw + 100vh) / 8, 72.5px);
   background-color: #ffffff;
   color: #c0c0c0;
   display: grid;
@@ -24,6 +24,10 @@ const CellWrapper = styled.div`
     props.index % 8 === 0 ? "none" : "1px solid #e6e6e6"};
   border-top: ${(props) =>
     props.index > 8 && props.index % 8 !== 0 ? "1px solid #e6e6e6" : "none"};
+
+  @media (min-width: 740px) {
+    width: 92.5px;
+  }
 `;
 
 const RowInCell = styled.div`
