@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import moment from "moment";
 
 const DivWrapper = styled("div")`
   display: flex;
   height: 15vh;
   position: fixed;
   top: 10%;
+  @media (min-width: 740px) {
+    width: 740px;
+  }
+  // width: clamp(200px, 100%, 740px);
 `;
 
 const TextWrapper = styled("span")`

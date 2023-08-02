@@ -17,13 +17,19 @@ import moment from "moment";
 //   color: #c0c0c0;
 // `;
 
-const GridWrapper = styled.div`
+const GridWrapper = styled("div")`
   display: grid;
   grid-template-columns: repeat(8, auto);
   grid-template-rows: repeat(24, auto);
   background-color: #e6e6e6;
   margin-top: 20%;
-  width: clamp(200px, 100%,740px);
+  width: auto;
+  @media (min-width: 740px) {
+    display: grid;
+    width: 740px;
+    margin: auto;
+    margin-top: 20%;
+  }
 `;
 
 const CellWrapper = styled.div`
