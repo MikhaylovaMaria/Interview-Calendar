@@ -15,8 +15,8 @@ const GridWrapper = styled("div")`
 `;
 
 const CellWrapper = styled.div`
-  width: clamp(20px, (70vw + 70vh) / 7, 100px);
-  height: clamp(40px, (70vw + 70vh) / 7, 80px);
+  width: clamp(20px, (70vw + 70vh) / 7, 92.5px);
+  height: clamp(40px, (70vw + 70vh) / 7, 72.5px);
   background-color: #ffffff;
   color: #c0c0c0;
   display: grid;
