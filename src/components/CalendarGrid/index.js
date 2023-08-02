@@ -23,6 +23,7 @@ const GridWrapper = styled.div`
   grid-template-rows: repeat(24, auto);
   background-color: #e6e6e6;
   margin-top: 20%;
+  width: clamp(200px, 100%,740px);
 `;
 
 const CellWrapper = styled.div`
