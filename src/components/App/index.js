@@ -61,7 +61,6 @@ function App() {
   const plusHandler = () => {
     setIsOpenModal(true);
   };
-  console.log(today);
 
   return (
     <GlobalWrapper>

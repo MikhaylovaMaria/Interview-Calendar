@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -46,7 +46,8 @@ const DayWrapper = styled.div`
 `;
 
 const ShowDayWrapper = styled("button")`
-  background-color: #ebecff;
+  background-color: ${(props) =>
+    props.$mode === "active" ? "#b3b7ff" : "#ebecff"};
   margin: 2%;
   grid-column: 1 / -1;
   grid-row: 1 / -1;
@@ -87,21 +88,33 @@ function isBusyDay(day, events) {
 }
 
 const CalendarGrid = ({ startDayWeek, events, setButtonDelete }) => {
+  const [activeButton, setActiveButton] = useState();
+
   const daysArray = getDaysArray(startDayWeek);
+  function currentButtonClick(id) {
+    setButtonDelete(true);
+    setActiveButton(id);
+  }
 
   return (
     <GridWrapper>
       {daysArray.map((i, index) => (
         <CellWrapper key={i} index={index}>
           {events?.length > 0 && isBusyDay(i, events) ? (
-            <ShowDayWrapper onClick={() => setButtonDelete(true)}>
+            <ShowDayWrapper
+              $mode={moment(i).unix() === activeButton ? "active" : "none"}
+              onClick={() => currentButtonClick(moment(i).unix())}
+            >
               <RowInCell justifyContent={"flex-end"}>
                 <DayWrapper>{i.length === 5 && i}</DayWrapper>
               </RowInCell>
             </ShowDayWrapper>
           ) : (
             <RowInCell
-              onClick={() => setButtonDelete(false)}
+              onClick={() => {
+                setButtonDelete(false);
+                setActiveButton(false);
+              }}
               justifyContent={"flex-end"}
             >
               <DayWrapper>{i.length === 5 && i}</DayWrapper>
