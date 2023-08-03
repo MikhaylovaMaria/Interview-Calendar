@@ -2,23 +2,22 @@ import React from "react";
 import styled from "styled-components";
 
 const TextWrapper = styled("span")`
-  font-size: 12px;
+  font-size: ${(props) =>
+    props.$day ? " 0.6rem" : props.$month ? "0.9rem" : "1rem"};
 `;
 
 const TitleWrapper = styled(TextWrapper)`
-  font-weight: bold;
-  margin-right: 8px;
-  margin-left: 8px;
+  font-weight: ${(props) => (props.$day ? " bold" : "500")};
 `;
 
 const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(8, auto);
   grid-template-rows: repeat(3, auto);
-  grid-gap: 1px;
   background-color: #f6f6f6;
   position: relative;
   height: 15vh;
+  border: 1px solid #ebebeb;
   @media (min-width: 740px) {
     height: 10vh;
     width: 740px;
@@ -31,6 +30,10 @@ const CellWrapper = styled.div`
   background-color: #f6f6f6;
   color: #030303;
   text-align: center;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media (min-width: 740px) {
     width: 90px;
   }
@@ -42,25 +45,26 @@ const ButtonWrapper = styled("button")`
   color: #ff3131;
   height: 20px;
   grid-area: ${(props) => (props.$left ? "3 / 2 / 4 / 3" : "3 / 8 / 4 / 9")};
-  font-size: x-large;
+  font-size: 1.5rem;
 `;
 const TextWrapperCenter = styled("div")`
   border: unset;
   background-color: #f6f6f6;
   color: #030303;
-  height: 20px;
   grid-area: 3 / 3 / 4 / 8;
   text-align: center;
 `;
 
 const CurrentWrapperDay = styled("div")`
-  height: auto;
-  width: max-content;
+  height: 1.5rem;
+  width: 1.5rem;
   background: #ff3131;
   border-radius: 50%;
   display: flex;
-  margin: 0 auto;
+  padding: 4px;
   color: #ffffff;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Monitor = ({ currentDay, calendar, prevHandler, nextHandler, today }) => {
@@ -71,7 +75,7 @@ const Monitor = ({ currentDay, calendar, prevHandler, nextHandler, today }) => {
     <GridWrapper>
       {weekDay.map((i, index) => (
         <CellWrapper key={index}>
-          <TitleWrapper>{i}</TitleWrapper>
+          <TitleWrapper $day>{i}</TitleWrapper>
         </CellWrapper>
       ))}
       {calendar.map((i, index) =>
@@ -94,7 +98,9 @@ const Monitor = ({ currentDay, calendar, prevHandler, nextHandler, today }) => {
         &lt;
       </ButtonWrapper>
       <TextWrapperCenter>
-        <TitleWrapper>{today.format("MMMMYYYY")}</TitleWrapper>
+        <TitleWrapper $month>{`${today.format("MMMM")} ${today.format(
+          "YYYY"
+        )}`}</TitleWrapper>
       </TextWrapperCenter>
       <ButtonWrapper onClick={nextHandler}>&gt;</ButtonWrapper>
     </GridWrapper>
