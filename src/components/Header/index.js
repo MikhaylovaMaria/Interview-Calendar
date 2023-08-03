@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 const DivWrapper = styled("div")`
   display: flex;
-  height:10%;
-  width:clamp(50px, 100%, 740px);
+  width:auto;
   position: fixed;
   background-color: #ffff;
   font-size: 25px;
