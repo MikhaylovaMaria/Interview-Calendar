@@ -18,8 +18,9 @@ const GridWrapper = styled.div`
   grid-gap: 1px;
   background-color: #f6f6f6;
   position: relative;
-  height: 10vh;
+  height: 15vh;
   @media (min-width: 740px) {
+    height: 10vh;
     width: 740px;
     margin-top: 0.396px;
   }

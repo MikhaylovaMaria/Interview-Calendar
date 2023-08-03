@@ -11,9 +11,10 @@ const DivWrapper = styled("div")`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  height: 10vh;
+  height: 15vh;
   @media (min-width: 740px) {
     width: 740px;
+    height: 10vh;
 }
   }
 `;

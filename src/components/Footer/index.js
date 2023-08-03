@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const DivWrapper = styled("div")`
-  height: 5vh;
+  height: 10vh;
   background-color: #f6f6f6;
   position: relative;
   left: 0px;
@@ -10,6 +10,9 @@ const DivWrapper = styled("div")`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  @media (min-width: 740px) {
+    height: 5vh;
+  }
 `;
 
 const TodayButton = styled("button")`
