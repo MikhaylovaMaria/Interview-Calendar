@@ -15,7 +15,7 @@ const GlobalWrapper = styled.div`
 `;
 
 function App() {
-  const [today, setToday] = useState(moment());
+  const [today, setToday] = useState(moment.utc());
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [events, setEvents] = useState([]);
   const [currentEvents, setCurrentEvents] = useState([]);
