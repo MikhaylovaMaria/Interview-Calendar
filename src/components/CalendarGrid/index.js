@@ -87,14 +87,15 @@ function isBusyDay(day, events) {
   return false;
 }
 
-const CalendarGrid = ({ startDayWeek, events, setButtonDelete }) => {
-  const [activeButton, setActiveButton] = useState();
-
+const CalendarGrid = ({
+  startDayWeek,
+  events,
+  setButtonDelete,
+  activeButton,
+  setActiveButton,
+  currentButtonClick,
+}) => {
   const daysArray = getDaysArray(startDayWeek);
-  function currentButtonClick(id) {
-    setButtonDelete(true);
-    setActiveButton(id);
-  }
 
   return (
     <GridWrapper>

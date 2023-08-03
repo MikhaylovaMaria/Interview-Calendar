@@ -12,6 +12,10 @@ const ModalWrapper = styled.div`
   height: 100%;
   background-color: rgba(155, 155, 159, 0.5);
   z-index: 999;
+  @media (min-width: 740px) {
+    width: 740px;
+    left: auto;
+  }
 `;
 const Input = styled.input`
   padding: 0.5em;
@@ -22,6 +26,9 @@ const Input = styled.input`
   caret-color: #007aff;
   width: 100%;
   outline: none;
+  @media (min-width: 740px) {
+    width: 570px;
+  }
 `;
 const ModalContent = styled.div`
   position: absolute;
@@ -30,8 +37,11 @@ const ModalContent = styled.div`
   transform: translate(-50%, -50%);
   padding: 20px;
   background-color: #e6e6e7;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  @media (min-width: 740px) {
+    max-width: 740px;
+  }
 `;
 
 const ModalButtonWrapper = styled.div`
@@ -73,11 +83,15 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
     setError(null);
     setIsOpenModal(!isOpenModal);
   };
-  const createEvent = () => {
+  const createEvent = async () => {
     if (moment(inputValue).isValid()) {
-      setError(null);
-      addEvent(moment(inputValue).unix());
-      setIsOpenModal(false);
+      try {
+        setError(null);
+        await addEvent(moment(inputValue).unix());
+        setIsOpenModal(false);
+      } catch (error) {
+        setError(error);
+      }
     } else {
       setError("Incorrect data entry");
     }

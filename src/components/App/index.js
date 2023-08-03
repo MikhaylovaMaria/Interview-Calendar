@@ -18,18 +18,17 @@ function App() {
   const [today, setToday] = useState(moment());
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [events, setEvents] = useState([]);
-  const [currentEvents, setCurrentEvents] = useState([]);
+  // const [currentEvents, setCurrentEvents] = useState([]);
   const [buttonDelete, setButtonDelete] = useState(false);
+  const [activeButton, setActiveButton] = useState();
 
   useEffect(() => {
     const func = async () => {
-      const fetchedEvents = await getEvents();
+      const fetchedEvents = await getEvents(startDayWeek, endDayWeek);
       setEvents(fetchedEvents);
     };
     func();
-  }, [setEvents]);
-
-  // moment.updateLocale("en", { week: { dow: 1 } });
+  }, [today]);
 
   const startDayWeek = today.clone().startOf("week").day("Monday");
   const endDayWeek = startDayWeek.clone().add(6, "day");
@@ -37,12 +36,13 @@ function App() {
   const calendar = [];
   const day = startDayWeek.clone();
 
-  useEffect(() => {
-    const temp = events.filter(
-      (i) => i.time > startDayWeek.unix() && i.time < endDayWeek.unix()
-    );
-    setCurrentEvents(temp);
-  }, [today, events?.length]);
+  // useEffect(() => {
+  //   console.log(events);
+  //   const temp = events.filter(
+  //     (i) => i.time > startDayWeek.unix() && i.time < endDayWeek.unix()
+  //   );
+  //   setCurrentEvents(temp);
+  // }, [today, events?.length]);
 
   while (!day.isAfter(endDayWeek)) {
     calendar.push(day.clone());
@@ -51,17 +51,36 @@ function App() {
 
   const prevHandler = () => {
     setToday((prev) => prev.clone().subtract(1, "week"));
+    setButtonDelete(false);
   };
   const nextHandler = () => {
     setToday((prev) => prev.clone().add(1, "week"));
+    setButtonDelete(false);
   };
   const toToday = () => {
     setToday(currentDay);
+    setButtonDelete(false);
+    setActiveButton(false);
   };
   const plusHandler = () => {
     setIsOpenModal(true);
+    setButtonDelete(false);
+    setActiveButton(null);
   };
 
+  function currentButtonClick(id) {
+    setButtonDelete(true);
+    setActiveButton(id);
+  }
+
+  const deleteEvent = () => {
+    const temp = events.filter(
+      (i) => i.time >= activeButton && i.time < activeButton + 3600
+    );
+    temp.map((i) => deleteEvent(i.id));
+
+    console.log(temp);
+  };
   return (
     <GlobalWrapper>
       <Header plusHandler={plusHandler} />
@@ -74,11 +93,18 @@ function App() {
       />
       <CalendarGrid
         startDayWeek={startDayWeek}
-        events={currentEvents}
+        events={events}
         buttonDelete={buttonDelete}
         setButtonDelete={setButtonDelete}
+        activeButton={activeButton}
+        setActiveButton={setActiveButton}
+        currentButtonClick={currentButtonClick}
       />
-      <Footer toToday={toToday} buttonDelete={buttonDelete} />
+      <Footer
+        toToday={toToday}
+        buttonDelete={buttonDelete}
+        deleteEvent={deleteEvent}
+      />
       <Modal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
     </GlobalWrapper>
   );

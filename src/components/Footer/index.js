@@ -19,13 +19,20 @@ const TextWrapper = styled("span")`
   font-size: 25px;
   color: #ff3131;
 `;
-
-const Footer = ({ toToday, buttonDelete }) => {
+const DeleteButton = styled("button")`
+  border: unset;
+  background: none;
+`;
+const Footer = ({ toToday, buttonDelete, deleteEvent }) => {
   return (
     <DivWrapper>
       <TodayButton onClick={toToday}>
         <TextWrapper>Today</TextWrapper>
-        {buttonDelete && <TextWrapper>Delete</TextWrapper>}
+        {buttonDelete && (
+          <DeleteButton onClick={deleteEvent}>
+            <TextWrapper>Delete</TextWrapper>
+          </DeleteButton>
+        )}
       </TodayButton>
     </DivWrapper>
   );
