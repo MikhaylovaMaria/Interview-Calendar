@@ -6,12 +6,20 @@ import CalendarGrid from "../CalendarGrid";
 import Footer from "../Footer";
 import Modal from "../Modal/modal";
 import { getEvents } from "../../service";
+import { styled } from "styled-components";
+
+const GlobalWrapper = styled.div`
+  @media (min-width: 740px) {
+    margin: auto;
+  }
+`;
 
 function App() {
   const [today, setToday] = useState(moment());
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [events, setEvents] = useState([]);
   const [currentEvents, setCurrentEvents] = useState([]);
+  const [buttonDelete, setButtonDelete] = useState(false);
 
   useEffect(() => {
     const func = async () => {
@@ -30,9 +38,7 @@ function App() {
 
   useEffect(() => {
     const temp = events.filter(
-      (i) =>
-        i.content.time > startDayWeek.unix() &&
-        i.content.time < endDayWeek.unix()
+      (i) => i.time > startDayWeek.unix() && i.time < endDayWeek.unix()
     );
     setCurrentEvents(temp);
   }, [today, events?.length]);
@@ -54,11 +60,10 @@ function App() {
   const plusHandler = () => {
     setIsOpenModal(true);
   };
-
-  console.log(moment("2023-08-02 23:47:55").isValid());
+  console.log("startDay", startDayWeek.unix());
 
   return (
-    <div>
+    <GlobalWrapper>
       <Header plusHandler={plusHandler} />
       <Monitor
         currentDay={currentDay}
@@ -67,10 +72,15 @@ function App() {
         nextHandler={nextHandler}
         today={today}
       />
-      <CalendarGrid startDayWeek={startDayWeek} events={currentEvents} />
-      <Footer toToday={toToday} />
+      <CalendarGrid
+        startDayWeek={startDayWeek}
+        events={currentEvents}
+        buttonDelete={buttonDelete}
+        setButtonDelete={setButtonDelete}
+      />
+      <Footer toToday={toToday} buttonDelete={buttonDelete} />
       <Modal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
-    </div>
+    </GlobalWrapper>
   );
 }
 

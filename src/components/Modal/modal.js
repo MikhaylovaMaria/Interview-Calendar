@@ -1,6 +1,7 @@
 import moment from "moment";
 import { useState } from "react";
 import styled from "styled-components";
+import { addEvent } from "../../service";
 
 const ModalWrapper = styled.div`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
@@ -37,12 +38,15 @@ const ModalButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  border: 1px solid;
+  padding: 0;
+  width: 100%;
 `;
 
 const ModalButton = styled.button`
   padding: 10px 20px;
   color: #007aff;
-  // border: none;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
   background-color: #e6e6e7;
@@ -50,34 +54,47 @@ const ModalButton = styled.button`
   margin-right: 0px;
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+`;
+
 const Modal = ({ isOpenModal, setIsOpenModal }) => {
   const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState(null);
 
   const handleInputChange = (event) => {
     const { value } = event.target;
     setInputValue(value);
+    setError(null);
   };
 
   const toggleModal = () => {
+    setInputValue("");
+    setError(null);
     setIsOpenModal(!isOpenModal);
   };
   const createEvent = () => {
-    console.log(inputValue);
+    if (moment(inputValue).isValid()) {
+      setError(null);
+      addEvent(moment(inputValue).unix());
+      setIsOpenModal(false);
+    } else {
+      setError("Incorrect data entry");
+    }
   };
   return (
-    <div>
-      <ModalWrapper isOpen={isOpenModal} onClick={toggleModal}>
-        <ModalContent onClick={(e) => e.stopPropagation()}>
-          <h2>https://calendar.com</h2>
-          <p>Enter event time: YYYY-MM-DD HH:mm:ss</p>
-          <Input onChange={() => handleInputChange} />
-          <ModalButtonWrapper>
-            <ModalButton onClick={toggleModal}>Cancel</ModalButton>
-            <ModalButton onClick={createEvent}>Ок</ModalButton>
-          </ModalButtonWrapper>
-        </ModalContent>
-      </ModalWrapper>
-    </div>
+    <ModalWrapper isOpen={isOpenModal} onClick={toggleModal}>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
+        <h2>https://calendar.com</h2>
+        <p>Enter event time: YYYY-MM-DD HH:mm:ss</p>
+        <Input onChange={handleInputChange} />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <ModalButtonWrapper>
+          <ModalButton onClick={toggleModal}>Cancel</ModalButton>
+          <ModalButton onClick={createEvent}>Ок</ModalButton>
+        </ModalButtonWrapper>
+      </ModalContent>
+    </ModalWrapper>
   );
 };
 

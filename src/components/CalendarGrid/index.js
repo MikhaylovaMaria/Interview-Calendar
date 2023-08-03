@@ -42,10 +42,10 @@ const DayWrapper = styled.div`
   margin-right: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 `;
 
-const ShowDayWrapper = styled("div")`
+const ShowDayWrapper = styled("button")`
   background-color: #ebecff;
   margin: 2%;
   grid-column: 1 / -1;
@@ -54,20 +54,24 @@ const ShowDayWrapper = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
 `;
 
 function getDaysArray(startDay) {
   let resultArray = [];
   let day = startDay.clone();
-  for (let i = 0; i < 192; i++) {
-    if (i % 8 === 0) {
-      i / 8 < 10
-        ? resultArray.push(`0${i / 8}:00`)
-        : resultArray.push(`${i / 8}:00`);
-    } else {
-      resultArray.push(day.clone());
-      day.add(1, "hour");
+  for (let i = 0; i < 24; i++) {
+    for (let j = 0; j < 8; j++) {
+      if (j === 0) {
+        i < 10 ? resultArray.push(`0${i}:00`) : resultArray.push(`${i}:00`);
+      } else {
+        const temp = day.clone();
+        resultArray.push(moment(temp));
+        day.add(1, "day");
+      }
     }
+    day = startDay.clone();
+    day.add(i + 1, "hour");
   }
 
   return resultArray;
@@ -75,29 +79,33 @@ function getDaysArray(startDay) {
 
 function isBusyDay(day, events) {
   for (let i = 0; i < events.length; i++) {
-    const temp = moment.unix(events[i].content.time);
+    const temp = moment.unix(events[i].time);
     if (moment(day).isSame(temp, "day") && moment(day).isSame(temp, "hour"))
       return true;
   }
   return false;
 }
 
-const CalendarGrid = ({ startDayWeek, events }) => {
+const CalendarGrid = ({ startDayWeek, events, setButtonDelete }) => {
   const daysArray = getDaysArray(startDayWeek);
+  console.log(daysArray);
 
   return (
     <GridWrapper>
       {daysArray.map((i, index) => (
         <CellWrapper key={i} index={index}>
           {events?.length > 0 && isBusyDay(i, events) ? (
-            <ShowDayWrapper>
+            <ShowDayWrapper onClick={() => setButtonDelete(true)}>
               <RowInCell justifyContent={"flex-end"}>
-                <DayWrapper>{typeof i !== "object" && i}</DayWrapper>
+                <DayWrapper>{i.length === 5 && i}</DayWrapper>
               </RowInCell>
             </ShowDayWrapper>
           ) : (
-            <RowInCell justifyContent={"flex-end"}>
-              <DayWrapper>{typeof i !== "object" && i}</DayWrapper>
+            <RowInCell
+              onClick={() => setButtonDelete(false)}
+              justifyContent={"flex-end"}
+            >
+              <DayWrapper>{i.length === 5 && i}</DayWrapper>
             </RowInCell>
           )}
         </CellWrapper>

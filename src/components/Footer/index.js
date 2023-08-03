@@ -20,11 +20,12 @@ const TextWrapper = styled("span")`
   color: #ff3131;
 `;
 
-const Footer = ({ toToday }) => {
+const Footer = ({ toToday, buttonDelete }) => {
   return (
     <DivWrapper>
       <TodayButton onClick={toToday}>
         <TextWrapper>Today</TextWrapper>
+        {buttonDelete && <TextWrapper>Delete</TextWrapper>}
       </TodayButton>
     </DivWrapper>
   );

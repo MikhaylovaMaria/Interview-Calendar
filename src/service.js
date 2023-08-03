@@ -14,7 +14,7 @@ export async function getEvents() {
   for (const key in data) {
     const eventObj = {
       id: key,
-      content: data[key],
+      time: data[key],
     };
 
     transformedEvents.push(eventObj);
