@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -7,6 +7,7 @@ const GridWrapper = styled("div")`
   grid-template-columns: repeat(8, auto);
   grid-template-rows: repeat(24, auto);
   background-color: #e6e6e6;
+  position: relative;
   width: auto;
   height: 100vh;
   overflow-y: scroll;
@@ -106,7 +107,7 @@ const CalendarGrid = ({
               $mode={moment(i).unix() === activeButton ? "active" : "none"}
               onClick={() => currentButtonClick(moment(i).unix())}
             >
-              <RowInCell justifyContent={"flex-end"}>
+              <RowInCell>
                 <DayWrapper>{i.length === 5 && i}</DayWrapper>
               </RowInCell>
             </ShowDayWrapper>
@@ -116,7 +117,6 @@ const CalendarGrid = ({
                 setButtonDelete(false);
                 setActiveButton(false);
               }}
-              justifyContent={"flex-end"}
             >
               <DayWrapper>{i.length === 5 && i}</DayWrapper>
             </RowInCell>

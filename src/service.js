@@ -26,18 +26,25 @@ export async function getEvents(start, finish) {
 }
 
 export async function addEvent(eventDate) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/events.json`, {
-    method: "POST",
-    body: JSON.stringify(eventDate),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Could not create event.");
+  try {
+    await fetch(`${FIREBASE_DOMAIN}/events.json`, {
+      method: "POST",
+      body: JSON.stringify(eventDate),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // const data = await response.json();
+  } catch (error) {
+    // const { message } = error.response.data
+    return "Could not create event. Try later";
+    // console.log(error);
+    // throw new Error();
   }
+
+  // if (!response.ok) {
+  //   throw new Error(data.message || "Could not create event.");
+  // }
 
   return null;
 }

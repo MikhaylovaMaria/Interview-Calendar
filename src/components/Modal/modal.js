@@ -99,8 +99,9 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
       try {
         setError(null);
         await addEvent(moment(inputValue).unix());
-        setIsOpenModal(false);
+        // setIsOpenModal(false);
       } catch (error) {
+        console.log("jfjfj", error);
         setError(error);
       }
     } else {

@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const DivWrapper = styled("div")`
-  height: 10vh;
+  height: 5vh;
   background-color: #f6f6f6;
   position: relative;
   left: 0px;
   bottom: 0px;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const TodayButton = styled("button")`
@@ -15,9 +17,10 @@ const TodayButton = styled("button")`
   background: none;
 `;
 const TextWrapper = styled("span")`
-  padding-left: 10%;
-  font-size: 25px;
+  font-size: 1.2rem;
   color: #ff3131;
+  padding-left: ${(props) => (props.right ? "0" : "18px")};
+  padding-right: ${(props) => (props.right ? "0" : "18px")};
 `;
 const DeleteButton = styled("button")`
   border: unset;
@@ -28,12 +31,13 @@ const Footer = ({ toToday, buttonDelete, deleteEvent }) => {
     <DivWrapper>
       <TodayButton onClick={toToday}>
         <TextWrapper>Today</TextWrapper>
-        {buttonDelete && (
-          <DeleteButton onClick={deleteEvent}>
-            <TextWrapper>Delete</TextWrapper>
-          </DeleteButton>
-        )}
       </TodayButton>
+
+      {buttonDelete && (
+        <DeleteButton onClick={deleteEvent}>
+          <TextWrapper $right>Delete</TextWrapper>
+        </DeleteButton>
+      )}
     </DivWrapper>
   );
 };
