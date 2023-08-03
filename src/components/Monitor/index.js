@@ -17,7 +17,7 @@ const GridWrapper = styled.div`
   background-color: #f6f6f6;
   position: relative;
   height: 15vh;
-  border: 1px solid #ebebeb;
+  border: 2px solid #ebebeb;
   @media (min-width: 740px) {
     height: 10vh;
     width: 740px;
