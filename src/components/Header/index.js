@@ -6,11 +6,9 @@ const DivWrapper = styled("div")`
   width:auto;
   position: fixed;
   background-color: #ffff;
-  font-size: 25px;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  height: 15vh;
   @media (min-width: 740px) {
     width: 740px;
     height: 10vh;
@@ -18,18 +16,18 @@ const DivWrapper = styled("div")`
   }
 `;
 const TextWrapper = styled("span")`
-  font-size: 20px;
+  font-size: 2rem;
 `;
 const TitleWrapper = styled(TextWrapper)`
-  padding-left: 12.5%;
+  padding-left: 8%;
 `;
 
 const ButtonWrapperPlus = styled("button")`
   border: unset;
   background-color: #ffff;
   color: #ff3131;
-  font-size: 40px;
-  margin-left: 0;
+  font-size: 3rem;
+  margin-right: 4%
 `;
 
 const Header = ({ plusHandler }) => {
