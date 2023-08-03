@@ -29,7 +29,7 @@ function App() {
     func();
   }, [setEvents]);
 
-  moment.updateLocale("en", { week: { dow: 1 } });
+  moment.updateLocale("ru", { week: { dow: 1 } });
   const startDayWeek = today.clone().startOf("week");
   const endDayWeek = today.clone().endOf("week");
   const currentDay = moment();
@@ -60,7 +60,7 @@ function App() {
   const plusHandler = () => {
     setIsOpenModal(true);
   };
-  console.log("startDay", startDayWeek.unix());
+  console.log(today);
 
   return (
     <GlobalWrapper>

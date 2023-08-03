@@ -88,7 +88,6 @@ function isBusyDay(day, events) {
 
 const CalendarGrid = ({ startDayWeek, events, setButtonDelete }) => {
   const daysArray = getDaysArray(startDayWeek);
-  console.log(daysArray);
 
   return (
     <GridWrapper>
