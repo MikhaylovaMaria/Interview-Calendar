@@ -30,6 +30,8 @@ function App() {
   }, [setEvents]);
 
   moment.updateLocale("en", { week: { dow: 1 } });
+
+  moment.locale("en", { week: { dow: 1 } });
   const startDayWeek = today.clone().startOf("week");
   const endDayWeek = today.clone().endOf("week");
   const currentDay = moment();
