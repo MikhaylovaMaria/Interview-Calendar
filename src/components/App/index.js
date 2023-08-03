@@ -5,7 +5,7 @@ import Monitor from "../Monitor";
 import CalendarGrid from "../CalendarGrid";
 import Footer from "../Footer";
 import Modal from "../Modal/modal";
-import { getEvents } from "../../service";
+import { deleteEventById, getEvents } from "../../service";
 import { styled } from "styled-components";
 
 const GlobalWrapper = styled.div`
@@ -28,10 +28,12 @@ function App() {
       setEvents(fetchedEvents);
     };
     func();
+
+    console.log(events);
   }, [today]);
 
   const startDayWeek = today.clone().startOf("week").day("Monday");
-  const endDayWeek = startDayWeek.clone().add(6, "day");
+  const endDayWeek = today.clone().endOf("week").add(1, "day");
   const currentDay = moment();
   const calendar = [];
   const day = startDayWeek.clone();
@@ -77,7 +79,7 @@ function App() {
     const temp = events.filter(
       (i) => i.time >= activeButton && i.time < activeButton + 3600
     );
-    temp.map((i) => deleteEvent(i.id));
+    temp.map((i) => deleteEventById(i.id));
 
     console.log(temp);
   };

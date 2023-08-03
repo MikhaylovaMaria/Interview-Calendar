@@ -12,8 +12,6 @@ export async function getEvents(start, finish) {
   const transformedEvents = [];
 
   for (const key in data) {
-    // console.log(start.unix());
-    // console.log(data[key]);
     if (data[key] >= start.unix() && data[key] < finish.unix()) {
       const eventObj = {
         id: key,
@@ -44,10 +42,9 @@ export async function addEvent(eventDate) {
   return null;
 }
 
-export async function deleteEvent(id) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/events.json`, {
+export async function deleteEventById(id) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/events/${id}.json`, {
     method: "DELETE",
-    body: JSON.stringify(id),
     headers: {
       "Content-Type": "application/json",
     },

@@ -3,6 +3,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import { addEvent } from "../../service";
 
+const TextWrapper = styled("p")`
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+`;
+
 const ModalWrapper = styled.div`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: fixed;
@@ -17,17 +23,25 @@ const ModalWrapper = styled.div`
     left: auto;
   }
 `;
+
+const InputWrapper = styled.div`
+  text-align: center;
+`;
+
 const Input = styled.input`
-  padding: 0.5em;
+  padding: 0.5em 10px;
   color: #000;
   background: #ffff;
   border: 1px solid #999;
   border-radius: 3px;
   caret-color: #007aff;
-  width: 100%;
+  width: 90%;
   outline: none;
+  margin-top: 5%;
+  margin-bottom: 2.5%;
+
   @media (min-width: 740px) {
-    width: 570px;
+    width: 476.667px;
   }
 `;
 const ModalContent = styled.div`
@@ -35,20 +49,17 @@ const ModalContent = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px;
   background-color: #e6e6e7;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  @media (min-width: 740px) {
-    max-width: 740px;
-  }
+  width: 70%;
 `;
 
 const ModalButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-  border: 1px solid;
+  border-top: 1px solid red;
   padding: 0;
   width: 100%;
 `;
@@ -99,9 +110,12 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
   return (
     <ModalWrapper isOpen={isOpenModal} onClick={toggleModal}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <h2>https://calendar.com</h2>
-        <p>Enter event time: YYYY-MM-DD HH:mm:ss</p>
-        <Input onChange={handleInputChange} />
+        <TextWrapper>https://calendar.com</TextWrapper>
+        <TextWrapper>Enter event time: </TextWrapper>
+        <TextWrapper> YYYY-MM-DD HH:mm:ss</TextWrapper>
+        <InputWrapper>
+          <Input onChange={handleInputChange} />
+        </InputWrapper>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <ModalButtonWrapper>
           <ModalButton onClick={toggleModal}>Cancel</ModalButton>
