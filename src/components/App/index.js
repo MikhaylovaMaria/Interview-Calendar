@@ -18,7 +18,6 @@ function App() {
   const [today, setToday] = useState(moment());
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [events, setEvents] = useState([]);
-  // const [currentEvents, setCurrentEvents] = useState([]);
   const [buttonDelete, setButtonDelete] = useState(false);
   const [activeButton, setActiveButton] = useState();
 
@@ -28,8 +27,6 @@ function App() {
       setEvents(fetchedEvents);
     };
     func();
-
-    console.log(events);
   }, [today]);
 
   const startDayWeek = today.clone().startOf("week").day("Monday");
@@ -37,14 +34,6 @@ function App() {
   const currentDay = moment();
   const calendar = [];
   const day = startDayWeek.clone();
-
-  // useEffect(() => {
-  //   console.log(events);
-  //   const temp = events.filter(
-  //     (i) => i.time > startDayWeek.unix() && i.time < endDayWeek.unix()
-  //   );
-  //   setCurrentEvents(temp);
-  // }, [today, events?.length]);
 
   while (!day.isAfter(endDayWeek)) {
     calendar.push(day.clone());
