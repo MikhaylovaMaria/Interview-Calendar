@@ -7,8 +7,9 @@ const GridWrapper = styled("div")`
   grid-template-columns: repeat(8, auto);
   grid-template-rows: repeat(24, auto);
   background-color: #e6e6e6;
-  position: relative;
   width: auto;
+  height: 100vh;
+  overflow-y: scroll;
   @media (min-width: 740px) {
     width: 740px;
   }
@@ -24,7 +25,6 @@ const CellWrapper = styled.div`
     props.index % 8 === 0 ? "none" : "1px solid #e6e6e6"};
   border-top: ${(props) =>
     props.index > 8 && props.index % 8 !== 0 ? "1px solid #e6e6e6" : "none"};
-
   @media (min-width: 740px) {
     width: 92.5px;
   }

@@ -39,7 +39,6 @@ const Input = styled.input`
   outline: none;
   margin-top: 5%;
   margin-bottom: 2.5%;
-
   @media (min-width: 740px) {
     width: 476.667px;
   }
@@ -59,24 +58,25 @@ const ModalButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-  border-top: 1px solid red;
-  padding: 0;
+  border-top: 1px solid #69697d;
   width: 100%;
 `;
 
 const ModalButton = styled.button`
   padding: 10px 20px;
   color: #007aff;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
   background-color: #e6e6e7;
+  border: none;
+  border-right: ${(props) => (props.$right ? "1px solid #69697d" : "none")};
   flex: 1;
-  margin-right: 0px;
+  border-bottom-right-radius: ${(props) => (props.$left ? "10px" : "0")};
+  border-bottom-left-radius: ${(props) => (props.$right ? "10px" : "0")};
 `;
 
 const ErrorMessage = styled.div`
   color: red;
+  text-align: center;
 `;
 
 const Modal = ({ isOpenModal, setIsOpenModal }) => {
@@ -118,8 +118,12 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
         </InputWrapper>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <ModalButtonWrapper>
-          <ModalButton onClick={toggleModal}>Cancel</ModalButton>
-          <ModalButton onClick={createEvent}>Ок</ModalButton>
+          <ModalButton $right onClick={toggleModal}>
+            Cancel
+          </ModalButton>
+          <ModalButton $left onClick={createEvent}>
+            Ок
+          </ModalButton>
         </ModalButtonWrapper>
       </ModalContent>
     </ModalWrapper>
