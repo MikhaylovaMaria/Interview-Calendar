@@ -30,7 +30,9 @@ const CellWrapper = styled.div`
     props.index > 8 && props.index % 8 !== 0 ? "2px solid  #e6e6e6" : "none"};
   @media (min-width: 740px) {
     width: 92.5px;
-  }
+    border-right: ${(props) =>
+      props.index % 8 === 0 ? "none" : "2px solid #e6e6e6"};
+   
 `;
 
 const RowInCell = styled.div`
