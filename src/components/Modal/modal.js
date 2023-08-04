@@ -2,6 +2,8 @@ import moment from "moment";
 import { useState } from "react";
 import styled from "styled-components";
 import { addEvent } from "../../service";
+import { useDispatch } from "react-redux";
+import { createNewEvent, eventsList } from "../../store/Events";
 
 const TextWrapper = styled("p")`
   font-size: 20px;
@@ -80,7 +82,8 @@ const ErrorMessage = styled.div`
 `;
 
 const Modal = ({ isOpenModal, setIsOpenModal }) => {
-  const [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState(null);
   const [error, setError] = useState(null);
 
   const handleInputChange = (event) => {
@@ -90,20 +93,16 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
   };
 
   const toggleModal = () => {
-    setInputValue("");
     setError(null);
-    setIsOpenModal(!isOpenModal);
+    setIsOpenModal(false);
+    setInputValue(null);
   };
-  const createEvent = async () => {
+  const createEvent = () => {
     if (moment(inputValue).isValid()) {
-      try {
-        setError(null);
-        await addEvent(moment(inputValue).unix());
-        // setIsOpenModal(false);
-      } catch (error) {
-        console.log("jfjfj", error);
-        setError(error);
-      }
+      dispatch(createNewEvent(moment(inputValue).unix()));
+      setError(null);
+      setInputValue(null);
+      setIsOpenModal(false);
     } else {
       setError("Incorrect data entry");
     }

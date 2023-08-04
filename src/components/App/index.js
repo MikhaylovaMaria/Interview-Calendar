@@ -4,17 +4,16 @@ import Monitor from "../Monitor";
 import CalendarGrid from "../CalendarGrid";
 import Footer from "../Footer";
 import Modal from "../Modal/modal";
-import { deleteEventById, getEvents } from "../../service";
 import { styled } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import {
   currentHandlerWeek,
   getEndDayWeek,
   getStartDayWeek,
-  getweekDay,
   nextHandlerWeek,
   prevHandlerWeek,
 } from "../../store/currentDay";
+import { eventsList, getCurrentEvents, removeEvent } from "../../store/Events";
 
 const GlobalWrapper = styled.div`
   @media (min-width: 740px) {
@@ -26,25 +25,13 @@ function App() {
   const dispatch = useDispatch();
 
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [events, setEvents] = useState([]);
+  const events = useSelector(getCurrentEvents());
   const [buttonDelete, setButtonDelete] = useState(false);
   const [activeButton, setActiveButton] = useState();
 
-  // const currentDay = useSelector(getCurrentDay());
-  // const currentDay = moment();
-  const today = useSelector(getweekDay());
-  // const [today, setToday] = useState(moment());
-
   useEffect(() => {
-    const func = async () => {
-      const fetchedEvents = await getEvents(startDayWeek, endDayWeek);
-      setEvents(fetchedEvents);
-    };
-    func();
-  }, [today]);
-
-  // const temp = useSelector(getStartDayWeek());
-  // console.log(temp);
+    dispatch(eventsList());
+  }, []);
 
   const startDayWeek = useSelector(getStartDayWeek());
   const endDayWeek = useSelector(getEndDayWeek());
@@ -59,17 +46,17 @@ function App() {
 
   const prevHandler = () => {
     dispatch(prevHandlerWeek());
-    // setToday((prev) => prev.clone().subtract(1, "week"));
+    dispatch(eventsList());
     setButtonDelete(false);
   };
   const nextHandler = () => {
     dispatch(nextHandlerWeek());
-    // setToday((prev) => prev.clone().add(1, "week"));
+    dispatch(eventsList());
     setButtonDelete(false);
   };
   const toToday = () => {
     dispatch(currentHandlerWeek());
-    // setToday(currentDay);
+    dispatch(eventsList());
     setButtonDelete(false);
     setActiveButton(false);
   };
@@ -88,7 +75,8 @@ function App() {
     const temp = events.filter(
       (i) => i.time >= activeButton && i.time < activeButton + 3600
     );
-    temp.map((i) => deleteEventById(i.id));
+    temp.map((i) => dispatch(removeEvent(i.id)));
+    setButtonDelete(false);
   };
   return (
     <GlobalWrapper>
@@ -99,7 +87,6 @@ function App() {
         nextHandler={nextHandler}
       />
       <CalendarGrid
-        events={events}
         buttonDelete={buttonDelete}
         setButtonDelete={setButtonDelete}
         activeButton={activeButton}

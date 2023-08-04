@@ -2,27 +2,24 @@ const FIREBASE_DOMAIN =
   "https://interview-calendar-59cc4-default-rtdb.europe-west1.firebasedatabase.app/";
 
 export async function getEvents(start, finish) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/events.json`);
-  const data = await response.json();
+  try {
+    const response = await fetch(`${FIREBASE_DOMAIN}/events.json`);
+    const data = await response.json();
+    const transformedEvents = [];
 
-  if (!response.ok) {
-    throw new Error(data.message || "Eveeeeennnnntt");
-  }
-
-  const transformedEvents = [];
-
-  for (const key in data) {
-    if (data[key] >= start.unix() && data[key] < finish.unix()) {
-      const eventObj = {
-        id: key,
-        time: data[key],
-      };
-
-      transformedEvents.push(eventObj);
+    for (const key in data) {
+      if (data[key] >= start.unix() && data[key] < finish.unix()) {
+        const eventObj = {
+          id: key,
+          time: data[key],
+        };
+        transformedEvents.push(eventObj);
+      }
     }
+    return transformedEvents;
+  } catch (error) {
+    console.log(error);
   }
-
-  return transformedEvents;
 }
 
 export async function addEvent(eventDate) {
@@ -34,17 +31,9 @@ export async function addEvent(eventDate) {
         "Content-Type": "application/json",
       },
     });
-    // const data = await response.json();
   } catch (error) {
-    // const { message } = error.response.data
-    return "Could not create event. Try later";
-    // console.log(error);
-    // throw new Error();
+    console.log(error);
   }
-
-  // if (!response.ok) {
-  //   throw new Error(data.message || "Could not create event.");
-  // }
 
   return null;
 }
