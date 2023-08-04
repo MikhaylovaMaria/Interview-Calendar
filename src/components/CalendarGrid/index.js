@@ -12,7 +12,7 @@ const GridWrapper = styled("div")`
   background-color: #e6e6e6;
   position: relative;
   width: 100vw;
-  height: 70vh;
+  height: 40vh;
   overflow-y: scroll;
   @media (min-width: 740px) {
     width: 740px;
