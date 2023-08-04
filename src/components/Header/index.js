@@ -10,10 +10,8 @@ const DivWrapper = styled("div")`
   position: relative;
   height: 10vh;
   @media (min-width: 740px) {
-    width: 740px;   
-    align-items: end;
-    padding-bottom: 3%;
-}
+    width: 740px; 
+  }
   }
 `;
 const TextWrapper = styled("span")`
