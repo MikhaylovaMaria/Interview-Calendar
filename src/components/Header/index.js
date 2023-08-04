@@ -17,7 +17,7 @@ const DivWrapper = styled("div")`
   }
 `;
 const TextWrapper = styled("span")`
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 const TitleWrapper = styled(TextWrapper)`
   padding-left: 8%;

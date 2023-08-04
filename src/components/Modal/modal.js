@@ -7,8 +7,12 @@ import { createNewEvent } from "../../store/events";
 const TextWrapper = styled("p")`
   text-align: center;
   margin: 0;
-  font-size: ${(props) => (props.$text ? " 2rem" : "1.2rem")};
+  font-size: ${(props) => (props.$text ? "1rem" : "0.7rem")};
   font-weight: ${(props) => (props.$text ? "bold" : "none")};
+  @media (min-width: 740px) {
+    font-size: ${(props) => (props.$text ? "2rem" : "1.2rem")};
+    font-weight: ${(props) => (props.$text ? "bold" : "none")};
+  }
 `;
 
 const ModalWrapper = styled.div`
@@ -31,7 +35,7 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  padding: 0.5em 10px;
+  padding: 1% 5%;
   color: #000;
   background: #ffff;
   border: 1px solid #999;
@@ -39,10 +43,11 @@ const Input = styled.input`
   caret-color: #007aff;
   width: 90%;
   outline: none;
-  margin-top: 5%;
+  margin-top: 2%;
   margin-bottom: 2.5%;
   @media (min-width: 740px) {
     width: 476.667px;
+    height: 100%;
   }
 `;
 const ModalContent = styled.div`
@@ -53,7 +58,10 @@ const ModalContent = styled.div`
   background-color: #e6e6e7;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  width: 70%;
+  width: 90%;
+  @media (min-width: 740px) {
+    width: 70%;
+  }
 `;
 
 const ModalButtonWrapper = styled.div`
@@ -95,13 +103,13 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
   const toggleModal = () => {
     setError(null);
     setIsOpenModal(false);
-    setInputValue(null);
+    setInputValue("");
   };
   const createEvent = () => {
     if (moment(inputValue).isValid()) {
       dispatch(createNewEvent(moment(inputValue).unix()));
       setError(null);
-      setInputValue(null);
+      setInputValue("");
       setIsOpenModal(false);
     } else {
       setError("Incorrect data entry");
@@ -114,7 +122,7 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
         <TextWrapper>Enter event time: </TextWrapper>
         <TextWrapper> YYYY-MM-DD HH:mm:ss</TextWrapper>
         <InputWrapper>
-          <Input onChange={handleInputChange} />
+          <Input onChange={handleInputChange} value={inputValue} />
         </InputWrapper>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <ModalButtonWrapper>
