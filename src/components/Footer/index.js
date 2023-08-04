@@ -7,10 +7,11 @@ const DivWrapper = styled("div")`
   position: relative;
   left: 0px;
   bottom: 0px;
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   @media (min-width: 740px) {
+    width: 740px;
     height: 5vh;
   }
 `;

@@ -11,8 +11,8 @@ const GridWrapper = styled("div")`
   grid-template-rows: repeat(24, auto);
   background-color: #e6e6e6;
   position: relative;
-  width: auto;
-  height: 100vh;
+  width: 100vw;
+  height: 70vh;
   overflow-y: scroll;
   @media (min-width: 740px) {
     width: 740px;
@@ -20,8 +20,9 @@ const GridWrapper = styled("div")`
 `;
 
 const CellWrapper = styled.div`
-  width: clamp(20px, (100vw + 100vh) / 8, 92.5px);
+  width: 12vw;
   height: clamp(40px, (100vw + 100vh) / 8, 72.5px);
+  // height: 10vh;
   background-color: #ffffff;
   color: #c0c0c0;
   display: grid;

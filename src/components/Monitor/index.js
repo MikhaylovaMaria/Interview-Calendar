@@ -18,6 +18,7 @@ const GridWrapper = styled.div`
   grid-template-rows: repeat(3, auto);
   background-color: #f6f6f6;
   position: relative;
+  width: 100vw;
   height: 15vh;
   border: 2px solid #ebebeb;
   @media (min-width: 740px) {
@@ -28,7 +29,7 @@ const GridWrapper = styled.div`
 `;
 
 const CellWrapper = styled.div`
-  width: clamp(50px, (100vw + 100vh) / 8, 92.5px);
+  width: 12vw;
   background-color: #f6f6f6;
   color: #030303;
   text-align: center;
@@ -71,7 +72,7 @@ const CurrentWrapperDay = styled("div")`
 
 const Monitor = ({ calendar, prevHandler, nextHandler }) => {
   const today = useSelector(getweekDay());
-  const currentDay = useSelector(getCurrentDay())
+  const currentDay = useSelector(getCurrentDay());
   const weekDay = ["", "M", "T", "W", "T", "F", "S", "S"];
   calendar = ["", ...calendar];
 
