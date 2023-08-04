@@ -4,6 +4,8 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { getStartDayWeek } from "../../store/currentDay";
 import { getCurrentEvents } from "../../store/events";
+import { getDaysArray } from "../../helper/gettingDaysArray";
+import { isBusyDay } from "../../helper/eventsInDay";
 
 const GridWrapper = styled("div")`
   display: grid;
@@ -44,7 +46,7 @@ const RowInCell = styled.div`
 
 const DayWrapper = styled.div`
   height: 0px;
-  margin-right: 10px;
+  margin-right: 5px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -63,34 +65,12 @@ const ShowDayWrapper = styled("button")`
   border: none;
 `;
 
-function getDaysArray(startDay) {
-  let resultArray = [];
-  let day = startDay.clone();
-  for (let i = 0; i < 24; i++) {
-    for (let j = 0; j < 8; j++) {
-      if (j === 0) {
-        i < 10 ? resultArray.push(`0${i}:00`) : resultArray.push(`${i}:00`);
-      } else {
-        const temp = day.clone();
-        resultArray.push(moment(temp));
-        day.add(1, "day");
-      }
-    }
-    day = startDay.clone();
-    day.add(i + 1, "hour");
+const TextWrapper = styled("span")`
+  font-size: 1.5vh;
+  @media (min-width: 740px) {
+    font-size: 3.5vh;
   }
-
-  return resultArray;
-}
-
-function isBusyDay(day, events) {
-  for (let i = 0; i < events.length; i++) {
-    const temp = moment.unix(events[i].time);
-    if (moment(day).isSame(temp, "day") && moment(day).isSame(temp, "hour"))
-      return true;
-  }
-  return false;
-}
+`;
 
 const CalendarGrid = ({
   setButtonDelete,
@@ -110,11 +90,7 @@ const CalendarGrid = ({
             <ShowDayWrapper
               $mode={moment(i).unix() === activeButton ? "active" : "none"}
               onClick={() => currentButtonClick(moment(i).unix())}
-            >
-              <RowInCell>
-                <DayWrapper>{i.length === 5 && i}</DayWrapper>
-              </RowInCell>
-            </ShowDayWrapper>
+            />
           ) : (
             <RowInCell
               onClick={() => {
@@ -122,7 +98,9 @@ const CalendarGrid = ({
                 setActiveButton(false);
               }}
             >
-              <DayWrapper>{i.length === 5 && i}</DayWrapper>
+              <DayWrapper>
+                <TextWrapper>{i.length === 5 && i}</TextWrapper>
+              </DayWrapper>
             </RowInCell>
           )}
         </CellWrapper>
