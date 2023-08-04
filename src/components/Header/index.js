@@ -28,7 +28,6 @@ const ButtonWrapperPlus = styled("button")`
   background-color: #ffff;
   color: #ff3131;
   font-size: 3rem;
-  margin-right: 4%;
 `;
 
 const Header = ({ plusHandler }) => {
