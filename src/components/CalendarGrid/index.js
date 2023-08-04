@@ -3,7 +3,7 @@ import styled from "styled-components";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { getStartDayWeek } from "../../store/currentDay";
-import { getCurrentEvents } from "../../store/Events";
+import { getCurrentEvents } from "../../store/events";
 
 const GridWrapper = styled("div")`
   display: grid;

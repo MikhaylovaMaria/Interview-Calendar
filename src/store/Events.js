@@ -5,26 +5,10 @@ const EventsSlice = createSlice({
   name: "events",
   initialState: {
     events: [],
-    isLoading: true,
-    error: null,
   },
   reducers: {
-    eventsRequested: (state) => {
-      state.isLoading = true;
-    },
     eventsReceived: (state, action) => {
       state.events = action.payload;
-      state.isLoading = false;
-    },
-    eventsRequestFailed: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    eventCreatedFailed: (state, action) => {
-      state.error = action.payload;
-    },
-    eventRemovedFailed: (state, action) => {
-      state.error = action.payload;
     },
     eventRemoveReceived: (state, action) => {
       state.events = state.events.filter((i) => i.id !== action.payload);
@@ -34,34 +18,32 @@ const EventsSlice = createSlice({
 
 const { reducer: eventsReducer, actions } = EventsSlice;
 
-const {
-  eventsRequested,
-  eventsReceived,
-  eventsRequestFailed,
-  eventCreatedFailed,
-  eventRemoveReceived,
-  eventRemovedFailed,
-} = actions;
-const eventCreateReceived = createAction("events/createReceived ");
+const { eventsReceived, eventRemoveReceived } = actions;
+
+const eventCreateReceived = createAction("events/createReceived");
+const eventsRequestFailed = createAction("events/LoadFailed");
+const eventCreatedFailed = createAction("events/CreatedFailed");
+const eventRemovedFailed = createAction("eventsRemovedFailed");
 
 export const eventsList = () => async (dispatch, getState) => {
   const { startDay, endDay } = getState().currentDay;
-  dispatch(eventsRequested());
   try {
     const content = await getEvents(startDay, endDay);
     dispatch(eventsReceived(content));
   } catch (error) {
-    dispatch(eventsRequestFailed(error.message));
+    dispatch(eventsRequestFailed());
   }
 };
 
-export const createNewEvent = (content) => async (dispatch) => {
+export const createNewEvent = (data) => async (dispatch) => {
   try {
-    await addEvent(content);
-    dispatch(eventCreateReceived);
-    dispatch(eventsList());
+    const content = await addEvent(data);
+    if (content === null) {
+      dispatch(eventCreateReceived());
+      dispatch(eventsList());
+    }
   } catch (error) {
-    dispatch(eventCreatedFailed(error.message));
+    dispatch(eventCreatedFailed());
   }
 };
 

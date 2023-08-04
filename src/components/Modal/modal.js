@@ -1,9 +1,8 @@
 import moment from "moment";
 import { useState } from "react";
 import styled from "styled-components";
-import { addEvent } from "../../service";
 import { useDispatch } from "react-redux";
-import { createNewEvent, eventsList } from "../../store/Events";
+import { createNewEvent } from "../../store/events";
 
 const TextWrapper = styled("p")`
   font-size: 20px;

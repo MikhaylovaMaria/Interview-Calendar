@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const FIREBASE_DOMAIN =
   "https://interview-calendar-59cc4-default-rtdb.europe-west1.firebasedatabase.app/";
 
@@ -6,7 +8,6 @@ export async function getEvents(start, finish) {
     const response = await fetch(`${FIREBASE_DOMAIN}/events.json`);
     const data = await response.json();
     const transformedEvents = [];
-
     for (const key in data) {
       if (data[key] >= start.unix() && data[key] < finish.unix()) {
         const eventObj = {
@@ -18,7 +19,8 @@ export async function getEvents(start, finish) {
     }
     return transformedEvents;
   } catch (error) {
-    console.log(error);
+    toast.error("Failed to load events. Try later!");
+    return Promise.reject(error);
   }
 }
 
@@ -31,25 +33,24 @@ export async function addEvent(eventDate) {
         "Content-Type": "application/json",
       },
     });
+    return null;
   } catch (error) {
-    console.log(error);
+    toast.error("Failed to сreate event. Try later!");
+    return Promise.reject(error);
   }
-
-  return null;
 }
 
 export async function deleteEventById(id) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/events/${id}.json`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Could not delete event.");
+  try {
+    await fetch(`${FIREBASE_DOMAIN}/events/${id}.json`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return null;
+  } catch (error) {
+    toast.error("Failed to delete event. Try later!");
+    return Promise.reject(error);
   }
-
-  return null;
 }

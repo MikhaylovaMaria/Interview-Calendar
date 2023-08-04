@@ -13,7 +13,9 @@ import {
   nextHandlerWeek,
   prevHandlerWeek,
 } from "../../store/currentDay";
-import { eventsList, getCurrentEvents, removeEvent } from "../../store/Events";
+import { eventsList, getCurrentEvents, removeEvent } from "../../store/events";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const GlobalWrapper = styled.div`
   @media (min-width: 740px) {
@@ -77,6 +79,7 @@ function App() {
     );
     temp.map((i) => dispatch(removeEvent(i.id)));
     setButtonDelete(false);
+    setActiveButton(false);
   };
   return (
     <GlobalWrapper>
@@ -99,6 +102,7 @@ function App() {
         deleteEvent={deleteEvent}
       />
       <Modal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+      <ToastContainer />
     </GlobalWrapper>
   );
 }
