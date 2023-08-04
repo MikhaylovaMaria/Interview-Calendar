@@ -47,6 +47,7 @@ const ButtonWrapper = styled("button")`
   color: #ff3131;
   grid-area: ${(props) => (props.$left ? "3 / 2 / 4 / 3" : "3 / 8 / 4 / 9")};
   font-size: 1.5rem;
+  padding: 0;
 `;
 const TextWrapperCenter = styled("div")`
   border: unset;
