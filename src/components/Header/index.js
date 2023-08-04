@@ -16,6 +16,9 @@ const DivWrapper = styled("div")`
 `;
 const TextWrapper = styled("span")`
   font-size: 3vh;
+  @media (min-width: 740px) {
+    font-size: 6vh;
+  }
 `;
 const TitleWrapper = styled(TextWrapper)`
   padding-left: 8%;
@@ -26,6 +29,9 @@ const ButtonWrapperPlus = styled("button")`
   background-color: #ffff;
   color: #ff3131;
   font-size: 6vh;
+  @media (min-width: 740px) {
+    font-size: 10vh;
+  }
 `;
 
 const Header = ({ plusHandler }) => {
