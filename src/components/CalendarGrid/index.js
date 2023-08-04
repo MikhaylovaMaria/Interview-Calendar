@@ -27,9 +27,9 @@ const CellWrapper = styled.div`
   color: #c0c0c0;
   display: grid;
   border-right: ${(props) =>
-    props.index % 8 === 0 ? "none" : "2px solid #e6e6e6"};
+    props.index % 8 === 0 ? "none" : "0.1rem solid #e6e6e6"};
   border-top: ${(props) =>
-    props.index > 8 && props.index % 8 !== 0 ? "2px solid #e6e6e6" : "none"};
+    props.index > 8 && props.index % 8 !== 0 ? "0.1rem solid #e6e6e6" : "none"};
   @media (min-width: 740px) {
     width: 92.5px;
   }

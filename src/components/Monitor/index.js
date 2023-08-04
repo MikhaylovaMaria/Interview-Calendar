@@ -22,7 +22,6 @@ const GridWrapper = styled.div`
   height: 15vh;
   border: 2px solid #ebebeb;
   @media (min-width: 740px) {
-    height: 10vh;
     width: 740px;
     margin-top: 0.396px;
   }

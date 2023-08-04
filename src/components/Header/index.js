@@ -11,7 +11,7 @@ const DivWrapper = styled("div")`
   position: relative;
   @media (min-width: 740px) {
     width: 740px;
-    height: 10vh;
+    height: 15vh;
 }
   }
 `;
