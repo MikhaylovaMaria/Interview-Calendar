@@ -50,17 +50,20 @@ function App() {
     dispatch(prevHandlerWeek());
     dispatch(eventsList());
     setButtonDelete(false);
+    setActiveButton(null);
   };
   const nextHandler = () => {
     dispatch(nextHandlerWeek());
     dispatch(eventsList());
     setButtonDelete(false);
+    setActiveButton(null);
   };
   const toToday = () => {
     dispatch(currentHandlerWeek());
     dispatch(eventsList());
     setButtonDelete(false);
     setActiveButton(false);
+    setActiveButton(null);
   };
   const plusHandler = () => {
     setIsOpenModal(true);
