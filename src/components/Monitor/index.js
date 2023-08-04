@@ -5,7 +5,11 @@ import { getCurrentDay, getweekDay } from "../../store/currentDay";
 
 const TextWrapper = styled("span")`
   font-size: ${(props) =>
-    props.$day ? " 0.6rem" : props.$month ? "0.9rem" : "1rem"};
+    props.$day ? "1vh" : props.$month ? "1.5vh" : "1.8vh"};
+  @media (min-width: 740px) {
+    font-size: ${(props) =>
+      props.$day ? "2vh" : props.$month ? "2.5vh" : "2.8vh"};
+  }
 `;
 
 const TitleWrapper = styled(TextWrapper)`
@@ -46,8 +50,11 @@ const ButtonWrapper = styled("button")`
   background-color: #f6f6f6;
   color: #ff3131;
   grid-area: ${(props) => (props.$left ? "3 / 2 / 4 / 3" : "3 / 8 / 4 / 9")};
-  font-size: 1.5rem;
+  font-size: 2.5vh;
   padding: 0;
+  @media (min-width: 740px) {
+    font-size: 4vh;
+  }
 `;
 const TextWrapperCenter = styled("div")`
   border: unset;
@@ -58,8 +65,8 @@ const TextWrapperCenter = styled("div")`
 `;
 
 const CurrentWrapperDay = styled("div")`
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2.2vh;
+  width: 2.2vh;
   background: #ff3131;
   border-radius: 50%;
   display: flex;
@@ -67,6 +74,10 @@ const CurrentWrapperDay = styled("div")`
   color: #ffffff;
   align-items: center;
   justify-content: center;
+  @media (min-width: 740px) {
+    height: 3.2vh;
+    width: 3.2vh;
+  }
 `;
 
 const Monitor = ({ calendar, prevHandler, nextHandler }) => {
