@@ -22,7 +22,7 @@ const GridWrapper = styled.div`
   height: 15vh;
   border: 2px solid #ebebeb;
   @media (min-width: 740px) {
-    width: 740px;
+    width: 740x;
     // margin-top: 0.396px;
   }
 `;
