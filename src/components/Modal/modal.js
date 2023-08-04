@@ -66,7 +66,7 @@ const ModalButtonWrapper = styled.div`
 
 const ModalButton = styled.button`
   padding: 10px 20px;
-  color: red;
+  color: #007aff;
   cursor: pointer;
   background-color: #e6e6e7;
   border: none;
