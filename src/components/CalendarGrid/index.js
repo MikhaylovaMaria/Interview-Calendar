@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import moment from "moment";
+import { useSelector } from "react-redux";
+import { getStartDayWeek } from "../../store/currentDay";
 
 const GridWrapper = styled("div")`
   display: grid;
@@ -89,13 +91,13 @@ function isBusyDay(day, events) {
 }
 
 const CalendarGrid = ({
-  startDayWeek,
   events,
   setButtonDelete,
   activeButton,
   setActiveButton,
   currentButtonClick,
 }) => {
+  const startDayWeek = useSelector(getStartDayWeek());
   const daysArray = getDaysArray(startDayWeek);
 
   return (

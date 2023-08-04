@@ -1,5 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { getCurrentDay, getweekDay } from "../../store/currentDay";
 
 const TextWrapper = styled("span")`
   font-size: ${(props) =>
@@ -67,7 +69,9 @@ const CurrentWrapperDay = styled("div")`
   justify-content: center;
 `;
 
-const Monitor = ({ currentDay, calendar, prevHandler, nextHandler, today }) => {
+const Monitor = ({ calendar, prevHandler, nextHandler }) => {
+  const today = useSelector(getweekDay());
+  const currentDay = useSelector(getCurrentDay())
   const weekDay = ["", "M", "T", "W", "T", "F", "S", "S"];
   calendar = ["", ...calendar];
 
