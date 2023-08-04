@@ -4,7 +4,7 @@ import styled from "styled-components";
 const DivWrapper = styled("div")`
   height: 5vh;
   background-color: #f6f6f6;
-  position: fixed;
+  position: relative;
   left: 0px;
   bottom: 0px;
   width: 100vw;
@@ -20,10 +20,13 @@ const TodayButton = styled("button")`
   background: none;
 `;
 const TextWrapper = styled("span")`
-  font-size: 1.2rem;
+  font-size: 2.5vh;
   color: #ff3131;
   padding-left: ${(props) => (props.right ? "0" : "18px")};
   padding-right: ${(props) => (props.right ? "0" : "18px")};
+  @media (min-width: 740px) {
+    font-size: 4vh;
+  }
 `;
 const DeleteButton = styled("button")`
   border: unset;
