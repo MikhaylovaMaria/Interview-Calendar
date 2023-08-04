@@ -7,7 +7,7 @@ import { createNewEvent } from "../../store/events";
 const TextWrapper = styled("p")`
   text-align: center;
   margin: 0;
-  font-size: ${(props) => (props.$text || props.$left ? " 2rem" : "1.2rem")};
+  font-size: ${(props) => (props.$text ? " 2rem" : "1.2rem")};
   font-weight: ${(props) => (props.$text ? "bold" : "none")};
 `;
 
@@ -119,10 +119,10 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <ModalButtonWrapper>
           <ModalButton $right onClick={toggleModal}>
-            Cancel
+            <TextWrapper>Сancel</TextWrapper>
           </ModalButton>
           <ModalButton $left onClick={createEvent}>
-            Ок
+            <TextWrapper>OK</TextWrapper>
           </ModalButton>
         </ModalButtonWrapper>
       </ModalContent>
