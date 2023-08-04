@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import currentDayReducer from "./currentDay";
-import eventsReducer from "./events";
+import eventsReducer from "./events.js";
 
 
 const rootReducer = combineReducers({
