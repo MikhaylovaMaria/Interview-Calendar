@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const DivWrapper = styled("div")`
-  height: 10vh;
+  height: 5vh;
   background-color: #f6f6f6;
   position: relative;
   left: 0px;

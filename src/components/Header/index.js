@@ -8,7 +8,7 @@ const DivWrapper = styled("div")`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  height: 15vh;
+  height: 10vh;
   @media (min-width: 740px) {
     width: 740px;   
     align-items: end;
