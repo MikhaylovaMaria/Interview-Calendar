@@ -11,7 +11,7 @@ const DivWrapper = styled("div")`
   display: flex;
   justify-content: space-between;
   @media (min-width: 740px) {
-    position: relative;
+    left: auto;
     width: 740px;
   }
 `;
