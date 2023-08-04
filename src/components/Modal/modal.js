@@ -7,10 +7,10 @@ import { createNewEvent } from "../../store/events";
 const TextWrapper = styled("p")`
   text-align: center;
   margin: 0;
-  font-size: ${(props) => (props.$text ? "1rem" : "0.7rem")};
+  font-size: ${(props) => (props.$text ? "6vw" : "3vw")};
   font-weight: ${(props) => (props.$text ? "bold" : "none")};
   @media (min-width: 740px) {
-    font-size: ${(props) => (props.$text ? "2rem" : "1.2rem")};
+    font-size: ${(props) => (props.$text ? "2rem" : "1.5rem")};
     font-weight: ${(props) => (props.$text ? "bold" : "none")};
   }
 `;
@@ -87,6 +87,10 @@ const ModalButton = styled.button`
 const ErrorMessage = styled.div`
   color: red;
   text-align: center;
+  font-size: 4vw;
+  @media (min-width: 740px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Modal = ({ isOpenModal, setIsOpenModal }) => {
