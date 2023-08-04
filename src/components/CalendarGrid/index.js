@@ -22,7 +22,6 @@ const GridWrapper = styled("div")`
 const CellWrapper = styled.div`
   width: 12vw;
   height: clamp(40px, (100vw)/8, 72.5px);
-  // height: 10vh;
   background-color: #ffffff;
   color: #c0c0c0;
   display: grid;

@@ -12,7 +12,6 @@ const DivWrapper = styled("div")`
   justify-content: space-between;
   @media (min-width: 740px) {
     width: 740px;
-    height: 5vh;
   }
 `;
 
