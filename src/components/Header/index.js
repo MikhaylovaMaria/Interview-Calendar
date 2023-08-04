@@ -4,14 +4,15 @@ import styled from "styled-components";
 const DivWrapper = styled("div")`
   display: flex;
   width:100vw;
-  position: fixed;
   background-color: #ffff;
   align-items: center;
   justify-content: space-between;
   position: relative;
   @media (min-width: 740px) {
     width: 740px;
-    height: 15vh;
+    height: 10vh;
+    align-items: end;
+    padding-bottom: 3%;
 }
   }
 `;
@@ -27,7 +28,7 @@ const ButtonWrapperPlus = styled("button")`
   background-color: #ffff;
   color: #ff3131;
   font-size: 3rem;
-  margin-right: 4%
+  margin-right: 4%;
 `;
 
 const Header = ({ plusHandler }) => {
