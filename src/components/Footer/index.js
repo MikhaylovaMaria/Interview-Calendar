@@ -4,7 +4,7 @@ import styled from "styled-components";
 const DivWrapper = styled("div")`
   height: 5vh;
   background-color: #f6f6f6;
-  position: relative;
+  position: fixed;
   left: 0px;
   bottom: 0px;
   width: 100vw;
