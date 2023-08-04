@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux";
 import { createNewEvent } from "../../store/events";
 
 const TextWrapper = styled("p")`
-  font-size: 20px;
   text-align: center;
   margin: 0;
+  font-size: ${(props) => (props.$text || props.$left ? " 2rem" : "1.2rem")};
+  font-weight: ${(props) => (props.$text ? "bold" : "none")};
 `;
 
 const ModalWrapper = styled.div`
@@ -109,7 +110,7 @@ const Modal = ({ isOpenModal, setIsOpenModal }) => {
   return (
     <ModalWrapper isOpen={isOpenModal} onClick={toggleModal}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <TextWrapper>https://calendar.com</TextWrapper>
+        <TextWrapper $text>https://calendar.com</TextWrapper>
         <TextWrapper>Enter event time: </TextWrapper>
         <TextWrapper> YYYY-MM-DD HH:mm:ss</TextWrapper>
         <InputWrapper>

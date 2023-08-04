@@ -14,7 +14,6 @@ const GridWrapper = styled("div")`
   width: 100vw;
   height: 70vh;
   overflow-y: scroll;
-  overflow-x: hidden;
   @media (min-width: 740px) {
     width: 740px;
   }
