@@ -22,7 +22,7 @@ const GridWrapper = styled.div`
   height: 15vh;
   border: 2px solid #ebebeb;
   @media (min-width: 740px) {
-    width: 738px;
+    width: 740px;
     // margin-top: 0.396px;
   }
 `;
@@ -45,7 +45,6 @@ const ButtonWrapper = styled("button")`
   border: unset;
   background-color: #f6f6f6;
   color: #ff3131;
-  // height: 20px;
   grid-area: ${(props) => (props.$left ? "3 / 2 / 4 / 3" : "3 / 8 / 4 / 9")};
   font-size: 1.5rem;
 `;
